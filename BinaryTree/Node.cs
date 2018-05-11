@@ -13,6 +13,11 @@ namespace BinaryTree
         public INode<T> LeftChildNode { get; set; }
         public T Key { get; set; }
 
+        public Node(T key)
+        {
+            this.Key = key;
+        }
+
         public void AddChild(INode<T> childNode)
         {
             throw new NotImplementedException();
