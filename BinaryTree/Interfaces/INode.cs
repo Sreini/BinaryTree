@@ -10,5 +10,6 @@ namespace BinaryTree.Interfaces
     {
         INode<T> LeftChildNode { get; set; }
         INode<T> RightChildNode { get; set; }
+        T Key { get; set; }
     }
 }
