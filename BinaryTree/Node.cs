@@ -20,7 +20,32 @@ namespace BinaryTree
 
         public void AddChild(INode<T> childNode)
         {
-            throw new NotImplementedException();
+            if (childNode.Key.CompareTo(this.Key) > 0)
+            {
+                //child node key is greater than this key
+                if (RightChildNode is null)
+                {
+                    RightChildNode = childNode;
+                }
+
+                RightChildNode.AddChild(childNode);
+
+            }else if (childNode.Key.CompareTo(this.Key) < 0)
+            {
+                //child node key is lesser than this key
+                if (LeftChildNode is null)
+                {
+                    LeftChildNode = childNode;
+                }
+
+                LeftChildNode.AddChild(childNode);
+            }
+            else
+            {
+                //child node key is equal to this key 
+                //do nothing
+                return;
+            }
         }
     }
 }
