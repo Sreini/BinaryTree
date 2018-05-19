@@ -16,6 +16,8 @@ namespace BinaryTree
         public Node(T key)
         {
             this.Key = key;
+            LeftChildNode = null;
+            RightChildNode = null;
         }
 
         public void AddChild(INode<T> childNode)
@@ -45,6 +47,24 @@ namespace BinaryTree
                 //child node key is equal to this key 
                 //do nothing
                 return;
+            }
+        }
+
+        public INode<T> GetChild(INode<T> childNode)
+        {
+            if (childNode.Key.CompareTo(this.Key) > 0)
+            {
+                //child node is greater than this key
+                return RightChildNode.GetChild(childNode);
+            } 
+            else if (childNode.Key.CompareTo(this.Key) < 0)
+            {
+                //child node is smaller than this key
+                return LeftChildNode.GetChild(childNode);
+            }
+            else
+            {
+                return this;
             }
         }
     }

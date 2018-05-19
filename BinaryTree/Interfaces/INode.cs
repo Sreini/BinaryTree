@@ -18,5 +18,12 @@ namespace BinaryTree.Interfaces
         /// <param name="childNode"></param>
         void AddChild(INode<T> childNode);
 
+
+        /// <summary>
+        /// Get Child Node of this Node
+        /// </summary>
+        /// <param name="childNode"></param>
+        INode<T> GetChild(INode<T> childNode);
+
     }
 }
