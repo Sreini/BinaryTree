@@ -22,8 +22,19 @@ namespace BinaryTree.Interfaces
         /// <summary>
         /// Get Child Node of this Node
         /// </summary>
-        /// <param name="childNode"></param>
-        INode<T> GetChild(INode<T> childNode);
+        /// <param name="key"></param>
+        INode<T> GetNodeByKey(T key);
 
+        /// <summary>
+        /// Delete a Child of this Node
+        /// </summary>
+        /// <param name="key"></param>
+        void DeleteNodeByKey(T key);
+
+        /// <summary>
+        /// Returns the number of direct children of this node
+        /// </summary>
+        /// <returns></returns>
+        int NumberOfDirectChilren();
     }
 }

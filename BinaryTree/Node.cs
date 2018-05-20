@@ -50,22 +50,70 @@ namespace BinaryTree
             }
         }
 
-        public INode<T> GetChild(INode<T> childNode)
+        public INode<T> GetNodeByKey(T key)
         {
-            if (childNode.Key.CompareTo(this.Key) > 0)
+                
+            if (key.CompareTo(this.Key) > 0 && !(RightChildNode is null))
             {
                 //child node is greater than this key
-                return RightChildNode.GetChild(childNode);
+                return RightChildNode.GetNodeByKey(key);
             } 
-            else if (childNode.Key.CompareTo(this.Key) < 0)
+            else if (key.CompareTo(this.Key) < 0 && !(LeftChildNode is null))
             {
                 //child node is smaller than this key
-                return LeftChildNode.GetChild(childNode);
+                return LeftChildNode.GetNodeByKey(key);
             }
-            else
+
+            return key.CompareTo(this.Key) == 0 ? this : null;
+            
+        }
+
+        public void DeleteNodeByKey(T key)
+        {
+            if (key.CompareTo(this.Key) == 0 )
             {
-                return this;
+                switch (this.NumberOfDirectChilren())
+                {
+                        case 0 :
+                            
+                            break;
+                }
+            }   
+            //switch (childNode.NumberOfDirectChilren())
+            //{
+            //        case 0:
+            //            if (LeftChildNode.Key.CompareTo(childNode.Key) == 0)
+            //            {
+            //                LeftChildNode = null;
+            //            }
+            //            break;
+
+            //        case 1:
+
+            //            break;
+
+            //}
+        }
+
+        
+
+        public int NumberOfDirectChilren()
+        {
+
+            if (!(RightChildNode is null) && !(LeftChildNode is null))
+            {
+                //has two children
+                return 2;
             }
+
+            if (RightChildNode is null || LeftChildNode is null)
+            {
+                //has one child
+                return 1;
+            }
+
+            //both child nodes are null so there are no children
+            return 0;
         }
     }
 }
