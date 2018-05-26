@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BinaryTree.Interfaces
 {
-    public interface INode<T> where T : IComparable<T>
+    internal interface INode<T> where T : IComparable<T>
     {
         Node<T> LeftChildNode { get; set; }
         Node<T> RightChildNode { get; set; }

@@ -4,10 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BinaryTree.Interfaces;
+using System.Runtime.CompilerServices;
 
+[assembly:InternalsVisibleTo("BinaryTreeTests")]
 namespace BinaryTree
 {
-     public class Node<T>: INode<T> where T: IComparable<T>
+    internal class Node<T>: INode<T> where T: IComparable<T>
     {
         public Node<T> RightChildNode { get; set; }
         public Node<T> LeftChildNode { get; set; }
@@ -16,6 +18,13 @@ namespace BinaryTree
         public Node(T key)
         {
             this.Key = key;
+            LeftChildNode = null;
+            RightChildNode = null;
+        }
+
+        public Node()
+        {
+            this.Key = default(T);
             LeftChildNode = null;
             RightChildNode = null;
         }
@@ -131,6 +140,16 @@ namespace BinaryTree
             return this.RightChildNode.MaximalNode();
         }
 
+        public Node<T> MinimalNode()
+        {
+            if (this.LeftChildNode is null)
+            {
+                return this;
+            }
+
+            return this.LeftChildNode.MinimalNode();
+        }
+
         private int NumberOfDirectChilren()
         {
 
@@ -148,6 +167,27 @@ namespace BinaryTree
 
             //both child nodes are null so there are no children
             return 0;
+        }
+
+        public int NumberOfChildren()
+        {
+            if (NumberOfDirectChilren() == 0)
+            {
+                return 0;
+            }
+
+            var result = this.NumberOfDirectChilren();
+            if (this.LeftChildNode is null)
+            {
+                result += LeftChildNode.NumberOfChildren();
+            }
+
+            if (this.RightChildNode is null)
+            {
+                result += RightChildNode.NumberOfChildren();
+            }
+
+            return result;
         }
 
     }

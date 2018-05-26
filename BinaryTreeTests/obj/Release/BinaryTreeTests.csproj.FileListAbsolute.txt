@@ -1,0 +1,17 @@
+D:\Repos\BinaryTree\BinaryTreeTests\bin\Release\Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.dll
+D:\Repos\BinaryTree\BinaryTreeTests\bin\Release\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.Interface.dll
+D:\Repos\BinaryTree\BinaryTreeTests\bin\Release\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.dll
+D:\Repos\BinaryTree\BinaryTreeTests\bin\Release\BinaryTreeTests.dll
+D:\Repos\BinaryTree\BinaryTreeTests\bin\Release\BinaryTreeTests.pdb
+D:\Repos\BinaryTree\BinaryTreeTests\bin\Release\BinaryTree.dll
+D:\Repos\BinaryTree\BinaryTreeTests\bin\Release\Microsoft.VisualStudio.TestPlatform.TestFramework.dll
+D:\Repos\BinaryTree\BinaryTreeTests\bin\Release\Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions.dll
+D:\Repos\BinaryTree\BinaryTreeTests\bin\Release\BinaryTree.pdb
+D:\Repos\BinaryTree\BinaryTreeTests\bin\Release\BinaryTree.dll.config
+D:\Repos\BinaryTree\BinaryTreeTests\bin\Release\Microsoft.VisualStudio.TestPlatform.TestFramework.xml
+D:\Repos\BinaryTree\BinaryTreeTests\bin\Release\Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions.xml
+D:\Repos\BinaryTree\BinaryTreeTests\obj\Release\BinaryTreeTests.csprojAssemblyReference.cache
+D:\Repos\BinaryTree\BinaryTreeTests\obj\Release\BinaryTreeTests.csproj.CoreCompileInputs.cache
+D:\Repos\BinaryTree\BinaryTreeTests\obj\Release\BinaryTreeTests.csproj.CopyComplete
+D:\Repos\BinaryTree\BinaryTreeTests\obj\Release\BinaryTreeTests.dll
+D:\Repos\BinaryTree\BinaryTreeTests\obj\Release\BinaryTreeTests.pdb
