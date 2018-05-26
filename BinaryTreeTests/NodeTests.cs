@@ -9,20 +9,61 @@ namespace BinaryTreeTests
     public class NodeTests
     {
         [TestMethod]
-        public void TestAddChild()
+        public void TestAddNode()
         {
             //Arrange
-            var Tree = new Node<int>(10);
+            var tree = new Node<int>(10);
 
             //Act
-            Tree.AddChild(new Node<int>(15));
-            Tree.AddChild(new Node<int>(7));
-            Tree.AddChild(new Node<int>(13));
+            tree.AddNode(15);
+            tree.AddNode(7);
+            tree.AddNode(13);
 
             //Assert
-            Assert.AreEqual(Tree.RightChildNode.Key, 15);
-            Assert.AreEqual(Tree.LeftChildNode.Key, 7);
-            Assert.AreEqual(Tree.RightChildNode.LeftChildNode.Key , 13);
+            Assert.AreEqual(tree.RightChildNode.Key, 15);
+            Assert.AreEqual(tree.LeftChildNode.Key, 7);
+            Assert.AreEqual(tree.RightChildNode.LeftChildNode.Key , 13);
+        }
+
+        [TestMethod]
+        public void TestDeleteNode()
+        {
+            //Arrange
+            var tree = new Node<int>(10);
+
+            //Act
+            tree.AddNode(23);
+            tree.AddNode(26);
+            tree.AddNode(2);
+            tree.AddNode(4);
+            tree.AddNode(216);
+            tree.AddNode(15);
+            tree.AddNode(8);
+            tree.AddNode(55);
+            tree.DeleteNode(216);
+
+            //Assert
+            Assert.AreEqual(tree.MaximalNode().Key, 55 );
+        }
+
+        [TestMethod]
+        public void TestGetNodeByKey()
+        {
+            //Arrange
+            var tree = new Node<int>(10);
+
+            //Act
+            tree.AddNode(23);
+            tree.AddNode(26);
+            tree.AddNode(2);
+            tree.AddNode(4);
+            tree.AddNode(216);
+            tree.AddNode(15);
+            tree.AddNode(8);
+            tree.AddNode(55);
+
+            //Assert
+            Assert.AreEqual(tree.GetNodeByKey(23).RightChildNode.Key, 26);
         }
     }
 }

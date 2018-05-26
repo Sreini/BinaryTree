@@ -8,33 +8,29 @@ namespace BinaryTree.Interfaces
 {
     public interface INode<T> where T : IComparable<T>
     {
-        INode<T> LeftChildNode { get; set; }
-        INode<T> RightChildNode { get; set; }
+        Node<T> LeftChildNode { get; set; }
+        Node<T> RightChildNode { get; set; }
         T Key { get; set; }
 
         /// <summary>
         /// Adds Child Node to this Node
         /// </summary>
-        /// <param name="childNode"></param>
-        void AddChild(INode<T> childNode);
+        /// <param name="key"></param>
+        void AddNode(T key);
 
 
         /// <summary>
         /// Get Child Node of this Node
         /// </summary>
         /// <param name="key"></param>
-        INode<T> GetNodeByKey(T key);
+        Node<T> GetNodeByKey(T key);
 
         /// <summary>
-        /// Delete a Child of this Node
+        /// Deletes the node with this key from the tree
         /// </summary>
         /// <param name="key"></param>
-        void DeleteNodeByKey(T key);
+        void DeleteNode(T key);
 
-        /// <summary>
-        /// Returns the number of direct children of this node
-        /// </summary>
-        /// <returns></returns>
-        int NumberOfDirectChilren();
+       
     }
 }

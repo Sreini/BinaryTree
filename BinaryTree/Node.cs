@@ -9,8 +9,8 @@ namespace BinaryTree
 {
      public class Node<T>: INode<T> where T: IComparable<T>
     {
-        public INode<T> RightChildNode { get; set; }
-        public INode<T> LeftChildNode { get; set; }
+        public Node<T> RightChildNode { get; set; }
+        public Node<T> LeftChildNode { get; set; }
         public T Key { get; set; }
 
         public Node(T key)
@@ -20,7 +20,40 @@ namespace BinaryTree
             RightChildNode = null;
         }
 
-        public void AddChild(INode<T> childNode)
+        
+
+        public void AddNode(T key)
+        {
+            AddChild(new Node<T>(key));
+        }
+
+        public Node<T> GetNodeByKey(T key)
+        {
+                
+            if (key.CompareTo(this.Key) > 0 && !(RightChildNode is null))
+            {
+                //child node is greater than this key
+                return RightChildNode.GetNodeByKey(key);
+            } 
+            else if (key.CompareTo(this.Key) < 0 && !(LeftChildNode is null))
+            {
+                //child node is smaller than this key
+                return LeftChildNode.GetNodeByKey(key);
+            }
+
+            return key.CompareTo(this.Key) == 0 ? this : null;
+            
+        }
+
+        public void DeleteNode(T key)
+        {
+            var newNode = this.DeleteNodeByKey(key);
+            this.LeftChildNode = newNode.LeftChildNode;
+            this.RightChildNode = newNode.RightChildNode;
+            this.Key = newNode.Key;
+        }
+
+        private void AddChild(Node<T> childNode)
         {
             if (childNode.Key.CompareTo(this.Key) > 0)
             {
@@ -50,54 +83,55 @@ namespace BinaryTree
             }
         }
 
-        public INode<T> GetNodeByKey(T key)
+        private Node<T> DeleteNodeByKey(T key)
         {
-                
-            if (key.CompareTo(this.Key) > 0 && !(RightChildNode is null))
-            {
-                //child node is greater than this key
-                return RightChildNode.GetNodeByKey(key);
-            } 
-            else if (key.CompareTo(this.Key) < 0 && !(LeftChildNode is null))
-            {
-                //child node is smaller than this key
-                return LeftChildNode.GetNodeByKey(key);
-            }
-
-            return key.CompareTo(this.Key) == 0 ? this : null;
-            
-        }
-
-        public void DeleteNodeByKey(T key)
-        {
+           
             if (key.CompareTo(this.Key) == 0 )
             {
                 switch (this.NumberOfDirectChilren())
                 {
-                        case 0 :
+                    case 0 :
+                        return null;    
                             
-                            break;
+                    case 1 :
+                        if (this.LeftChildNode is null)
+                        {
+                            return this.RightChildNode;
+                        }
+                        else
+                        {
+                            return this.LeftChildNode;
+                        }
+
+                    case 2 :
+                        this.Key = LeftChildNode.MaximalNode().Key;
+                        LeftChildNode = LeftChildNode.DeleteNodeByKey(this.Key);
+                        break;
                 }
+            } 
+            else if (key.CompareTo(this.Key) > 0)
+            {
+                RightChildNode = this.RightChildNode.DeleteNodeByKey(key);
             }   
-            //switch (childNode.NumberOfDirectChilren())
-            //{
-            //        case 0:
-            //            if (LeftChildNode.Key.CompareTo(childNode.Key) == 0)
-            //            {
-            //                LeftChildNode = null;
-            //            }
-            //            break;
+            else if (key.CompareTo(this.Key) < 0)
+            {
+                LeftChildNode = this.LeftChildNode.DeleteNodeByKey(key);
+            }
 
-            //        case 1:
-
-            //            break;
-
-            //}
+            return this;
         }
 
-        
+        public Node<T> MaximalNode()
+        {
+            if (this.RightChildNode is null)
+            {
+                return this;
+            }
 
-        public int NumberOfDirectChilren()
+            return this.RightChildNode.MaximalNode();
+        }
+
+        private int NumberOfDirectChilren()
         {
 
             if (!(RightChildNode is null) && !(LeftChildNode is null))
@@ -115,5 +149,6 @@ namespace BinaryTree
             //both child nodes are null so there are no children
             return 0;
         }
+
     }
 }
