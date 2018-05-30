@@ -16,7 +16,7 @@ namespace BinaryTree.Interfaces
         /// Adds Child Node to this Node
         /// </summary>
         /// <param name="key"></param>
-        void AddNode(T key);
+        bool AddNode(T key);
 
 
         /// <summary>
@@ -29,7 +29,8 @@ namespace BinaryTree.Interfaces
         /// Deletes the node with this key from the tree
         /// </summary>
         /// <param name="key"></param>
-        void DeleteNode(T key);
+        bool DeleteNode(T key);
+
 
        
     }

@@ -31,9 +31,9 @@ namespace BinaryTree
 
         
 
-        public void AddNode(T key)
+        public bool AddNode(T key)
         {
-            AddChild(new Node<T>(key));
+            return AddChild(new Node<T>(key));
         }
 
         public Node<T> GetNodeByKey(T key)
@@ -54,15 +54,16 @@ namespace BinaryTree
             
         }
 
-        public void DeleteNode(T key)
+        public bool DeleteNode(T key)
         {
-            var newNode = this.DeleteNodeByKey(key);
+            var newNode = this.DeleteNodeByKey(key, out bool noChange);
             this.LeftChildNode = newNode.LeftChildNode;
             this.RightChildNode = newNode.RightChildNode;
             this.Key = newNode.Key;
+            return noChange;
         }
 
-        private void AddChild(Node<T> childNode)
+        private bool AddChild(Node<T> childNode)
         {
             if (childNode.Key.CompareTo(this.Key) > 0)
             {
@@ -70,9 +71,10 @@ namespace BinaryTree
                 if (RightChildNode is null)
                 {
                     RightChildNode = childNode;
+                    return true;
                 }
 
-                RightChildNode.AddChild(childNode);
+                return RightChildNode.AddChild(childNode);
 
             }else if (childNode.Key.CompareTo(this.Key) < 0)
             {
@@ -80,20 +82,22 @@ namespace BinaryTree
                 if (LeftChildNode is null)
                 {
                     LeftChildNode = childNode;
+                    return true;
                 }
 
-                LeftChildNode.AddChild(childNode);
+                return LeftChildNode.AddChild(childNode);
             }
             else
             {
                 //child node key is equal to this key 
                 //do nothing
-                return;
+                return false;
             }
         }
 
-        private Node<T> DeleteNodeByKey(T key)
+        private Node<T> DeleteNodeByKey(T key, out bool noChange)
         {
+            noChange = false;
            
             if (key.CompareTo(this.Key) == 0 )
             {
@@ -114,19 +118,20 @@ namespace BinaryTree
 
                     case 2 :
                         this.Key = LeftChildNode.MaximalNode().Key;
-                        LeftChildNode = LeftChildNode.DeleteNodeByKey(this.Key);
+                        LeftChildNode = LeftChildNode.DeleteNodeByKey(this.Key, out noChange);
                         break;
                 }
             } 
             else if (key.CompareTo(this.Key) > 0)
             {
-                RightChildNode = this.RightChildNode.DeleteNodeByKey(key);
+                RightChildNode = this.RightChildNode.DeleteNodeByKey(key, out noChange);
             }   
             else if (key.CompareTo(this.Key) < 0)
             {
-                LeftChildNode = this.LeftChildNode.DeleteNodeByKey(key);
+                LeftChildNode = this.LeftChildNode.DeleteNodeByKey(key, out noChange);
             }
 
+            noChange = true;
             return this;
         }
 

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,21 +7,22 @@ using System.Threading.Tasks;
 
 namespace BinaryTree
 {
-    public class BinarySearchTree<T> where T: IComparable<T>
+    public class BinarySearchTree<T>: ICollection<T> where T: IComparable<T>
     {
         private Node<T> root { get; set; }
-        private int count { get; set; }
+        public int Count { get; private set; }
+        public bool IsReadOnly { get; set; }
 
         public BinarySearchTree()
         {
             root = new Node<T>();
-            count = 1;
+            Count = 1;
         }
 
         public BinarySearchTree(T key)
         {
             root = new Node<T>(key);
-            count = 1;
+            Count = 1;
         }
 
         public BinarySearchTree(ICollection<T> keyList)
@@ -29,46 +31,63 @@ namespace BinaryTree
             
             foreach (var key in keyList)
             {
-                root.AddNode(key);
+                if (root.AddNode(key))
+                {
+                    Count++;
+                }
+
             }
 
-            count = keyList.Count;
+           
         }
 
-        public void AddNode(T key)
+        public void Add(T key) 
         {
-            root.AddNode(key);
-            count++;
+            if (root.AddNode(key))
+            {
+                Count++;
+            }
+            
         }
 
+        //TO DO: change to make consistent with individual add
         public void AddNodeCollection(ICollection<T> keyList)
         {
             foreach (var key in keyList)
             {
-                AddNode(key);
+                Add(key);
             }
         }
 
-        public void DeleteNode(T key)
+        public bool Remove(T key)
         {
-            root.DeleteNode(key);
-            count--;
+            var result = root.DeleteNode(key);
+            if (result)
+            {
+                Count--;
+            }
+            return result;
         }
 
+        //TO DO: change to make consistent with individual add
         public void DeleteNodeCollection(ICollection<T> keyList)
         {
             foreach (var key in keyList)
             {
-                DeleteNode(key);
+                Remove(key);
             }
         }
 
         public BinarySearchTree<T> GetSubtree(T key)
         {
-            var subtree = new BinarySearchTree<T>(key);
-            subtree.root = this.root.GetNodeByKey(key);
-            subtree.count = subtree.root.NumberOfChildren() + 1;
-            return subtree;
+            var subtree = this.root.GetNodeByKey(key);
+            if (!(subtree is null))
+            {
+                var result = new BinarySearchTree<T> {root = subtree, Count = subtree.NumberOfChildren() + 1};
+                return result;
+            }
+            
+            return null;
         }
 
         public T GetMaximalKey()
@@ -81,9 +100,31 @@ namespace BinaryTree
             return root.MinimalNode().Key;
         }
 
-        public int GetCount()
+        public void Clear()
         {
-            return count;
+            this.root = null;
+            Count = 0;
+        }
+
+        public bool Contains(T key)
+        {
+            var tree = this.root.GetNodeByKey(key);
+            return !(tree is null);
+        }
+
+        public void CopyTo(T[] array, int arrayIndex)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerator<T> GetEnumerator()
+        {
+            throw new NotImplementedException();
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            throw new NotImplementedException();
         }
     }
 }

@@ -18,13 +18,13 @@ namespace BinaryTreeTests
             var tree = new BinarySearchTree<int>(10);
 
             //Act
-            tree.AddNode(15);
-            tree.AddNode(23);
-            tree.AddNode(21);
-            tree.AddNode(56);
+            tree.Add(15);
+            tree.Add(23);
+            tree.Add(21);
+            tree.Add(56);
 
             //Assert
-            Assert.AreEqual(tree.GetCount(), 5);
+            Assert.AreEqual(tree.Count, 5);
             Assert.AreEqual(tree.GetMaximalKey(), 56);
             Assert.AreEqual(tree.GetMinimalKey(), 10);
         }
@@ -36,16 +36,16 @@ namespace BinaryTreeTests
             var tree = new BinarySearchTree<int>(10);
 
             //Act
-            tree.AddNode(21);
-            tree.AddNode(45);
-            tree.AddNode(9);
-            tree.AddNode(3);
-            tree.AddNode(-10);
-            tree.DeleteNode(-10);
-            tree.DeleteNode(45);
+            tree.Add(21);
+            tree.Add(45);
+            tree.Add(9);
+            tree.Add(3);
+            tree.Add(-10);
+            tree.Remove(-10);
+            tree.Remove(45);
 
             //Assert
-            Assert.AreEqual(tree.GetCount(), 4);
+            Assert.AreEqual(tree.Count, 4);
             Assert.AreEqual(tree.GetMaximalKey(), 21);
             Assert.AreEqual(tree.GetMinimalKey(), 3);
 
