@@ -50,6 +50,29 @@ namespace BinaryTreeTests
             Assert.AreEqual(tree.GetMinimalKey(), 3);
 
         }
+
+        [TestMethod]
+        public void TestCollectionConstructor()
+        {
+            //Arrange
+            var list = new List<int>
+            {
+                10,
+                7,
+                56, 
+                45, 
+                23,
+                5
+            };
+
+            //Act
+            var tree = new BinarySearchTree<int>(list);
+
+            //Assert
+            Assert.AreEqual(tree.Count, 6);
+            Assert.AreEqual(tree.GetMaximalKey(), 56);
+            Assert.AreEqual(tree.GetMinimalKey(), 5);
+        }
     }
 
     
