@@ -11,3 +11,4 @@ D:\Repos\BinaryTree\BinaryTree\obj\Debug\BinaryTree.pdb
 D:\Repos\BinaryTree\BinaryTree\bin\Debug\BinaryTree.dll.config
 D:\Repos\BinaryTree\BinaryTree\bin\Debug\BinaryTree.dll
 D:\Repos\BinaryTree\BinaryTree\obj\Debug\BinaryTree.dll
+D:\repos\BinaryTree\BinaryTree\obj\Debug\BinaryTree.csprojAssemblyReference.cache

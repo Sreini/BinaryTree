@@ -85,15 +85,38 @@ namespace BinaryTree
             }
         }
 
+        //test this
         public BinarySearchTree<T> GetSubtree(T key)
         {
             var subtree = this.root.GetNodeByKey(key);
             if (!(subtree is null))
             {
-                var result = new BinarySearchTree<T> {root = subtree, Count = subtree.NumberOfChildren() + 1};
-                return result;
+                return new BinarySearchTree<T> {root = subtree, Count = subtree.NumberOfChildren() + 1};
             }
             
+            return null;
+        }
+
+        //test this
+        public  BinarySearchTree<T> GetLeftSubtree()
+        {
+            var leftSubtree = this.root.LeftChildNode;
+            if (!(leftSubtree is null))
+            {
+               return new BinarySearchTree<T> { root = leftSubtree, Count = leftSubtree.NumberOfChildren() + 1 };
+            }
+            return null;
+        }
+
+        //test this
+        public BinarySearchTree<T> GetRightSubtree()
+        {
+            var rightSubtree = this.root.RightChildNode;
+            if (!(rightSubtree is null))
+            {
+
+                return new BinarySearchTree<T> { root = rightSubtree, Count = rightSubtree.NumberOfChildren() + 1 };
+            }
             return null;
         }
 
@@ -119,9 +142,23 @@ namespace BinaryTree
             return !(tree is null);
         }
 
+        //test this
         public void CopyTo(T[] array, int arrayIndex)
         {
-            throw new NotImplementedException();
+            array[arrayIndex] = root.Key;
+            arrayIndex++;
+            var leftTree = GetLeftSubtree();
+            var rightTree = GetRightSubtree();
+            if (!(leftTree is null))
+            {
+                leftTree.CopyTo(array, arrayIndex);
+                arrayIndex += (leftTree.Count );
+            }
+            if(!(rightTree is null))
+            {
+                rightTree.CopyTo(array, arrayIndex);
+                arrayIndex += (rightTree.Count );
+            }
         }
 
         public IEnumerator<T> GetEnumerator()

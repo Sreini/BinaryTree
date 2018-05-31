@@ -73,7 +73,30 @@ namespace BinaryTreeTests
             Assert.AreEqual(tree.GetMaximalKey(), 56);
             Assert.AreEqual(tree.GetMinimalKey(), 5);
         }
+
+        [TestMethod]
+        public void TestCopyTo()
+        {
+            //Arrange
+            var tree = new BinarySearchTree<int>(25);
+            tree.Add(10);
+            tree.Add(90);
+            tree.Add(54);
+            tree.Add(94);
+            tree.Add(12);
+            tree.Add(7);
+            var array = new int[10];
+
+            //Act
+            tree.CopyTo(array, 0);
+            var testArray = new int[] { 25, 10, 90, 54, 94, 12, 7 };
+
+            //Assert
+            for(int index = 0; index < 7 ; index++)
+            {
+                Assert.AreEqual(array[index], testArray[index]);
+            }
+        }
     }
 
-    
 }

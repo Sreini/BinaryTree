@@ -182,12 +182,12 @@ namespace BinaryTree
             }
 
             var result = this.NumberOfDirectChilren();
-            if (this.LeftChildNode is null)
+            if (!(this.LeftChildNode is null))
             {
                 result += LeftChildNode.NumberOfChildren();
             }
 
-            if (this.RightChildNode is null)
+            if (!(this.RightChildNode is null))
             {
                 result += RightChildNode.NumberOfChildren();
             }
