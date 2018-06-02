@@ -10,13 +10,13 @@ namespace BinaryTree
 {
     public class BinarySearchTree<T>: ICollection<T> where T: IComparable<T>
     {
-        private Node<T> root { get; set; }
+        private Node<T> Root { get; set; }
         public int Count { get; private set; }
-        public bool IsReadOnly { get; set; }
+        public bool IsReadOnly => false;
 
         private BinarySearchTree()
         {
-            root = new Node<T>();
+            Root = new Node<T>();
             Count = 1;
         }
 
@@ -26,7 +26,7 @@ namespace BinaryTree
         /// <param name="key"></param>
         public BinarySearchTree(T key)
         {
-            root = new Node<T>(key);
+            Root = new Node<T>(key);
             Count = 1;
         }
 
@@ -36,12 +36,12 @@ namespace BinaryTree
         /// <param name="keyList"></param>
         public BinarySearchTree(ICollection<T> keyList)
         {
-            root = new Node<T>(keyList.FirstOrDefault());
+            Root = new Node<T>(keyList.FirstOrDefault());
             Count=1;
             
             foreach (var key in keyList)
             {
-                if (root.AddNode(key))
+                if (Root.AddNode(key))
                 {
                     Count++;
                 }
@@ -51,7 +51,7 @@ namespace BinaryTree
 
         public void Add(T key) 
         {
-            if (root.AddNode(key))
+            if (Root.AddNode(key))
             {
                 Count++;
             }
@@ -69,7 +69,7 @@ namespace BinaryTree
 
         public bool Remove(T key)
         {
-            var result = root.DeleteNode(key);
+            var result = Root.DeleteNode(key);
             if (result)
             {
                 Count--;
@@ -89,10 +89,10 @@ namespace BinaryTree
         //test this
         public BinarySearchTree<T> GetSubtree(T key)
         {
-            var subtree = this.root.GetNodeByKey(key);
+            var subtree = this.Root.GetNodeByKey(key);
             if (!(subtree is null))
             {
-                return new BinarySearchTree<T> {root = subtree, Count = subtree.NumberOfChildren() + 1};
+                return new BinarySearchTree<T> {Root = subtree, Count = subtree.NumberOfChildren() + 1};
             }
             
             return null;
@@ -101,10 +101,10 @@ namespace BinaryTree
         //test this
         public  BinarySearchTree<T> GetLeftSubtree()
         {
-            var leftSubtree = this.root.LeftChildNode;
+            var leftSubtree = this.Root.LeftChildNode;
             if (!(leftSubtree is null))
             {
-               return new BinarySearchTree<T> { root = leftSubtree, Count = leftSubtree.NumberOfChildren() + 1 };
+               return new BinarySearchTree<T> { Root = leftSubtree, Count = leftSubtree.NumberOfChildren() + 1 };
             }
             return null;
         }
@@ -112,34 +112,34 @@ namespace BinaryTree
         //test this
         public BinarySearchTree<T> GetRightSubtree()
         {
-            var rightSubtree = this.root.RightChildNode;
+            var rightSubtree = this.Root.RightChildNode;
             if (!(rightSubtree is null))
             {
 
-                return new BinarySearchTree<T> { root = rightSubtree, Count = rightSubtree.NumberOfChildren() + 1 };
+                return new BinarySearchTree<T> { Root = rightSubtree, Count = rightSubtree.NumberOfChildren() + 1 };
             }
             return null;
         }
 
         public T GetMaximalKey()
         {
-            return root.MaximalNode().Key;
+            return Root.MaximalNode().Key;
         }
 
         public T GetMinimalKey()
         {
-            return root.MinimalNode().Key;
+            return Root.MinimalNode().Key;
         }
 
         public void Clear()
         {
-            this.root = null;
+            this.Root = null;
             Count = 0;
         }
 
         public bool Contains(T key)
         {
-            var tree = this.root.GetNodeByKey(key);
+            var tree = this.Root.GetNodeByKey(key);
             return !(tree is null);
         }
 
@@ -153,7 +153,7 @@ namespace BinaryTree
         {
             try
             {
-                array[arrayIndex] = root.Key;
+                array[arrayIndex] = Root.Key;
                 arrayIndex++;
 
                 var leftTree = GetLeftSubtree();
