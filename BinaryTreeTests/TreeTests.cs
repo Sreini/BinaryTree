@@ -12,7 +12,7 @@ namespace BinaryTreeTests
     public class TreeTests
     {
         [TestMethod]
-        public void TestAddNode()
+        public void TestAdd()
         {
             //Arrange
             var tree = new BinarySearchTree<int>(10);
@@ -30,7 +30,7 @@ namespace BinaryTreeTests
         }
 
         [TestMethod]
-        public void TestDeleteNode()
+        public void TestRemove()
         {
             //Arrange
             var tree = new BinarySearchTree<int>(10);
@@ -72,6 +72,7 @@ namespace BinaryTreeTests
             Assert.AreEqual(tree.Count, 6);
             Assert.AreEqual(tree.GetMaximalKey(), 56);
             Assert.AreEqual(tree.GetMinimalKey(), 5);
+            
         }
 
         [TestMethod]
@@ -94,8 +95,31 @@ namespace BinaryTreeTests
             //Assert
             for(int index = 0; index < 7 ; index++)
             {
-                Assert.AreEqual(array[index], testArray[index]);
+                Assert.IsTrue(array.Contains(testArray[index]));
+                Assert.AreEqual(array[7], 0);
+                Assert.AreEqual(array[8], 0);
+                Assert.AreEqual(array[9], 0);
             }
+        }
+
+        [TestMethod]
+        public void TestRightLeftTree()
+        {
+            //Arrange
+            var tree = new BinarySearchTree<int>(new List<int>{4, 5, 6, 7, 8, 1, 10, -8, 27});
+            
+
+            //Act
+            var leftTree = tree.GetLeftSubtree();
+            var rightTree = tree.GetRightSubtree(); 
+
+            //Assert
+            Assert.AreEqual(leftTree.Count, 2);
+            Assert.AreEqual(leftTree.GetMaximalKey(), 1);
+            Assert.AreEqual(leftTree.GetMinimalKey(), -8);
+            Assert.AreEqual(rightTree.Count, 6);
+            Assert.AreEqual(rightTree.GetMaximalKey(), 27);
+            Assert.AreEqual(rightTree.GetMinimalKey(), 5);
         }
     }
 

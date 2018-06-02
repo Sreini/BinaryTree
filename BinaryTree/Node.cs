@@ -7,6 +7,7 @@ using BinaryTree.Interfaces;
 using System.Runtime.CompilerServices;
 
 [assembly:InternalsVisibleTo("BinaryTreeTests")]
+
 namespace BinaryTree
 {
     internal class Node<T>: INode<T> where T: IComparable<T>
@@ -155,7 +156,7 @@ namespace BinaryTree
             return this.LeftChildNode.MinimalNode();
         }
 
-        private int NumberOfDirectChilren()
+        internal int NumberOfDirectChilren()
         {
 
             if (!(RightChildNode is null) && !(LeftChildNode is null))
@@ -164,7 +165,9 @@ namespace BinaryTree
                 return 2;
             }
 
-            if (RightChildNode is null || LeftChildNode is null)
+            if ((RightChildNode is null && !(LeftChildNode is null)) 
+                || 
+                (LeftChildNode is null && !(RightChildNode is null)))
             {
                 //has one child
                 return 1;
@@ -174,6 +177,8 @@ namespace BinaryTree
             return 0;
         }
 
+
+        //needs fixing
         public int NumberOfChildren()
         {
             if (NumberOfDirectChilren() == 0)

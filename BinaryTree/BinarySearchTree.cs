@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -145,20 +146,28 @@ namespace BinaryTree
         //test this
         public void CopyTo(T[] array, int arrayIndex)
         {
-            array[arrayIndex] = root.Key;
-            arrayIndex++;
-            var leftTree = GetLeftSubtree();
-            var rightTree = GetRightSubtree();
-            if (!(leftTree is null))
+            CopyTo(array, ref arrayIndex);
+        }
+
+        private void CopyTo(T[] array, ref int arrayIndex)
+        {
+            try
             {
-                leftTree.CopyTo(array, arrayIndex);
-                arrayIndex += (leftTree.Count );
+                array[arrayIndex] = root.Key;
+                arrayIndex++;
+
+                var leftTree = GetLeftSubtree();
+                var rightTree = GetRightSubtree();
+
+                //calls copyTo on both trees if they are not null
+                leftTree?.CopyTo(array, ref arrayIndex);
+                rightTree?.CopyTo(array, ref arrayIndex);
             }
-            if(!(rightTree is null))
+            catch (IndexOutOfRangeException indexOutOfRangeException)
             {
-                rightTree.CopyTo(array, arrayIndex);
-                arrayIndex += (rightTree.Count );
+                Console.WriteLine(indexOutOfRangeException.Message);
             }
+
         }
 
         public IEnumerator<T> GetEnumerator()
