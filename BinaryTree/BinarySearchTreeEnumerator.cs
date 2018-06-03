@@ -9,10 +9,12 @@ namespace BinaryTree
 {
     internal class BinarySearchTreeEnumerator<T> : IEnumerator<T> where T: IComparable<T>
     {
-        private BinarySearchTree<T> _tree;
+        private BinarySearchTree<T> _parentTree;
+        private BinarySearchTree<T> _currentTree;
+        private Node<T> _currentNode => _currentTree.Root;
         private T _currentKey;
 
-        public T Current => _currentKey;
+        public T Current => _currentNode.Key;
 
         /// <summary>
         /// generic constructor
@@ -20,22 +22,43 @@ namespace BinaryTree
         /// <param name="tree"></param>
         public BinarySearchTreeEnumerator(BinarySearchTree<T> tree)
         {
-            this._tree = tree;
-            this._currentKey = tree.Root.Key;
+            this._parentTree = tree;
         }
 
         object IEnumerator.Current => Current;
 
         void IDisposable.Dispose(){}
 
+        //pls
         public bool MoveNext()
         {
-            throw new NotImplementedException();
+            if (_currentTree is null)
+            {
+                _currentTree = _parentTree;
+            }
+            var leftSubtree = this._currentTree.GetLeftSubtree();
+            var rightSubtree = this._currentTree.GetRightSubtree();
+
+            if (!(leftSubtree is null))
+            {
+                this._currentTree = leftSubtree;
+                
+            }
+            else if (!(rightSubtree is null))
+            {
+                this._currentTree = rightSubtree;
+                
+            }
+            else
+            {
+                
+            }
+            
         }
 
         public void Reset()
         {
-            _currentKey = _tree.Root.Key;
+            _currentTree = _parentTree;
         }
     }
 }
