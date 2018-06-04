@@ -134,7 +134,7 @@ namespace BinaryTree
         /// <summary>
         /// gets the left subtree of the parent node of this object
         /// </summary>
-        public  BinarySearchTree<T> GetLeftSubtree()
+        public  BinarySearchTree<T> LeftSubtree()
         {
             var leftSubtree = this.Root.LeftChildNode;
             if (!(leftSubtree is null))
@@ -147,7 +147,7 @@ namespace BinaryTree
         /// <summary>
         /// gets the right subtree of the parent node of this object
         /// </summary>
-        public BinarySearchTree<T> GetRightSubtree()
+        public BinarySearchTree<T> RightSubtree()
         {
             var rightSubtree = this.Root.RightChildNode;
             if (!(rightSubtree is null))
@@ -162,7 +162,7 @@ namespace BinaryTree
         /// gets the maximal key in the BinarySearchTree
         /// </summary>
         /// <returns></returns>
-        public T GetMaximalKey()
+        public T MaximalKey()
         {
             return this.Root.MaximalNode().Key;
         }
@@ -216,8 +216,8 @@ namespace BinaryTree
                 array[arrayIndex] = Root.Key;
                 arrayIndex++;
 
-                var leftTree = GetLeftSubtree();
-                var rightTree = GetRightSubtree();
+                var leftTree = LeftSubtree();
+                var rightTree = RightSubtree();
 
                 //calls copyTo on both trees if they are not null
                 leftTree?.CopyTo(array, ref arrayIndex);

@@ -10,6 +10,7 @@ namespace BinaryTree
     internal class BinarySearchTreeEnumerator<T> : IEnumerator<T> where T: IComparable<T>
     {
         private BinarySearchTree<T> _parentTree;
+        private Stack<Node<T>> _nodeStack;
         private BinarySearchTree<T> _currentTree;
         private Node<T> _currentNode => _currentTree.Root;
         private T _currentKey;
@@ -23,6 +24,7 @@ namespace BinaryTree
         public BinarySearchTreeEnumerator(BinarySearchTree<T> tree)
         {
             this._parentTree = tree;
+            _nodeStack = new Stack<Node<T>>();
         }
 
         object IEnumerator.Current => Current;
@@ -35,9 +37,11 @@ namespace BinaryTree
             if (_currentTree is null)
             {
                 _currentTree = _parentTree;
+                _nodeStack.Push(_currentNode);
+                return true;
             }
-            var leftSubtree = this._currentTree.GetLeftSubtree();
-            var rightSubtree = this._currentTree.GetRightSubtree();
+            var leftSubtree = this._currentTree.LeftSubtree();
+            var rightSubtree = this._currentTree.RightSubtree();
 
             if (!(leftSubtree is null))
             {
@@ -59,6 +63,7 @@ namespace BinaryTree
         public void Reset()
         {
             _currentTree = _parentTree;
+            _nodeStack.Clear();
         }
     }
 }

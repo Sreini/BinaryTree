@@ -25,7 +25,7 @@ namespace BinaryTreeTests
 
             //Assert
             Assert.AreEqual(tree.Count, 5);
-            Assert.AreEqual(tree.GetMaximalKey(), 56);
+            Assert.AreEqual(tree.MaximalKey(), 56);
             Assert.AreEqual(tree.GetMinimalKey(), 10);
         }
 
@@ -46,7 +46,7 @@ namespace BinaryTreeTests
 
             //Assert
             Assert.AreEqual(tree.Count, 4);
-            Assert.AreEqual(tree.GetMaximalKey(), 21);
+            Assert.AreEqual(tree.MaximalKey(), 21);
             Assert.AreEqual(tree.GetMinimalKey(), 3);
 
         }
@@ -70,7 +70,7 @@ namespace BinaryTreeTests
 
             //Assert
             Assert.AreEqual(tree.Count, 6);
-            Assert.AreEqual(tree.GetMaximalKey(), 56);
+            Assert.AreEqual(tree.MaximalKey(), 56);
             Assert.AreEqual(tree.GetMinimalKey(), 5);
             
         }
@@ -110,15 +110,15 @@ namespace BinaryTreeTests
             
 
             //Act
-            var leftTree = tree.GetLeftSubtree();
-            var rightTree = tree.GetRightSubtree(); 
+            var leftTree = tree.LeftSubtree();
+            var rightTree = tree.RightSubtree(); 
 
             //Assert
             Assert.AreEqual(leftTree.Count, 2);
-            Assert.AreEqual(leftTree.GetMaximalKey(), 1);
+            Assert.AreEqual(leftTree.MaximalKey(), 1);
             Assert.AreEqual(leftTree.GetMinimalKey(), -8);
             Assert.AreEqual(rightTree.Count, 6);
-            Assert.AreEqual(rightTree.GetMaximalKey(), 27);
+            Assert.AreEqual(rightTree.MaximalKey(), 27);
             Assert.AreEqual(rightTree.GetMinimalKey(), 5);
         }
     }
