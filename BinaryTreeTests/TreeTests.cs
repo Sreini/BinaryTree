@@ -69,6 +69,7 @@ namespace BinaryTreeTests
             var tree = new BinarySearchTree<int>(list);
 
             //Assert
+            Assert.AreEqual(tree.Root.Key, 10);
             Assert.AreEqual(tree.Count, 6);
             Assert.AreEqual(tree.MaximalKey(), 56);
             Assert.AreEqual(tree.GetMinimalKey(), 5);
@@ -120,6 +121,16 @@ namespace BinaryTreeTests
             Assert.AreEqual(rightTree.Count, 6);
             Assert.AreEqual(rightTree.MaximalKey(), 27);
             Assert.AreEqual(rightTree.GetMinimalKey(), 5);
+        }
+
+        [TestMethod]
+        public void TestIterator()
+        {
+            //Arrange
+            var tree = new BinarySearchTree<int>(new List<int>{4, 5, 6, 7, 8, 1, 10, -8, 27});
+            var newTree = new BinarySearchTree<int>(4);
+
+            
         }
     }
 
