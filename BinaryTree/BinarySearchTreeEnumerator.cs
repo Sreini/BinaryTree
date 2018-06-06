@@ -20,14 +20,9 @@ namespace BinaryTree
         private readonly Stack<Node<T>> _nodeStack;
 
         /// <summary>
-        /// the current tree
-        /// </summary>
-        private BinarySearchTree<T> _currentTree;
-
-        /// <summary>
         /// the current node
         /// </summary>
-        private Node<T> _currentNode => _currentTree.Root;
+        private Node<T> _currentNode;
 
         /// <summary>
         /// the current key
@@ -53,37 +48,51 @@ namespace BinaryTree
         //pls
         public bool MoveNext()
         {
-            if (_currentTree is null)
+            if (_currentNode is null)
             {
-                _currentTree = _parentTree;
-                _nodeStack.Push(_currentNode);
+                this._currentNode = _parentTree.Root;
+                this._nodeStack.Push(_currentNode);
                 return true;
             }
-            var leftSubtree = this._currentTree.LeftSubtree();
-            var rightSubtree = this._currentTree.RightSubtree();
+            var leftNode = this._currentNode.LeftChildNode;
+            var rightNode = this._currentNode.RightChildNode;
 
-            if (!(leftSubtree is null))
+            if (!(leftNode is null))
             {
-                this._currentTree = leftSubtree;
-                _nodeStack.Push(_currentNode);
+                this._currentNode = leftNode;
+                this._nodeStack.Push(_currentNode);
                 return true;
             }
-            else if (!(rightSubtree is null))
+            else if (!(rightNode is null))
             {
-                this._currentTree = rightSubtree;
-                _nodeStack.Push(_currentNode);
+                this._currentNode = rightNode;
+                this._nodeStack.Push(_currentNode);
                 return true;
             }
             else
             {
-                
+                //current node does not have children
+                var parent = this._nodeStack.Pop();
+                do
+                {
+                    
+                    if (parent is null)
+                    {
+                        return false;
+                    }
+
+                } while (!(parent.RightChildNode is null));
+
+                this._currentNode = parent.RightChildNode;
+                this._nodeStack.Push(_currentNode);
+                return true;
             }
             
         }
 
         public void Reset()
         {
-            _currentTree = _parentTree;
+            _currentNode = _parentTree.Root;
             _nodeStack.Clear();
         }
     }

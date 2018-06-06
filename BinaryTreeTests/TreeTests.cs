@@ -18,10 +18,12 @@ namespace BinaryTreeTests
             var tree = new BinarySearchTree<int>(10);
 
             //Act
+            tree.Add(10);
             tree.Add(15);
             tree.Add(23);
             tree.Add(21);
             tree.Add(56);
+            tree.Add(10);
 
             //Assert
             Assert.AreEqual(tree.Count, 5);
@@ -130,7 +132,14 @@ namespace BinaryTreeTests
             var tree = new BinarySearchTree<int>(new List<int>{4, 5, 6, 7, 8, 1, 10, -8, 27});
             var newTree = new BinarySearchTree<int>(4);
 
-            
+            //Act
+            //foreach (var key in tree)
+            //{
+           //     newTree.Add(key);
+            //}
+
+            //Assert
+            Assert.AreEqual(tree.Count, 9);
         }
     }
 
