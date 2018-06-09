@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,7 +18,7 @@ namespace BinaryTree
         /// <summary>
         /// a stack with nodes, used so the previous node that was traversed can easily be found
         /// </summary>
-        private readonly Stack<Node<T>> _nodeStack;
+        private readonly Stack<NodeWithDirection<T>> _nodeStack;
 
         /// <summary>
         /// the current node
@@ -38,7 +39,7 @@ namespace BinaryTree
         public BinarySearchTreeEnumerator(BinarySearchTree<T> tree)
         {
             this._parentTree = tree;
-            this._nodeStack = new Stack<Node<T>>();
+            this._nodeStack = new Stack<NodeWithDirection<T>>();
         }
 
         object IEnumerator.Current => Current;
@@ -51,7 +52,7 @@ namespace BinaryTree
             if (_currentNode is null)
             {
                 this._currentNode = _parentTree.Root;
-                this._nodeStack.Push(_currentNode);
+                this._nodeStack.Push(new NodeWithDirection<T>{Node = _currentNode, Direction = Direction.Entered});
                 return true;
             }
             var leftNode = this._currentNode.LeftChildNode;
@@ -60,31 +61,39 @@ namespace BinaryTree
             if (!(leftNode is null))
             {
                 this._currentNode = leftNode;
-                this._nodeStack.Push(_currentNode);
+                this._nodeStack.Push(new NodeWithDirection<T>{Node = _currentNode, Direction = Direction.Left});
                 return true;
             }
             else if (!(rightNode is null))
             {
                 this._currentNode = rightNode;
-                this._nodeStack.Push(_currentNode);
+                this._nodeStack.Push(new NodeWithDirection<T>{Node = _currentNode, Direction = Direction.Right});
                 return true;
             }
             else
             {
                 //current node does not have children
-                var parent = this._nodeStack.Pop();
+                var parent = _currentNode;
+                Node<T> child;
+                Direction direction;
+
                 do
                 {
                     
-                    if (parent is null)
+                    if (_nodeStack.Count == 0)
                     {
                         return false;
                     }
 
-                } while (!(parent.RightChildNode is null));
+                    var topOfStack = this._nodeStack.Pop();
+                    parent = topOfStack.Node;
+                    direction = topOfStack.Direction;
 
-                this._currentNode = parent.RightChildNode;
-                this._nodeStack.Push(_currentNode);
+                    child = direction == Direction.Right ? parent.LeftChildNode : parent.RightChildNode;
+                } while (child is null);
+
+                this._currentNode = child;
+                this._nodeStack.Push(new NodeWithDirection<T>{Node = _currentNode, Direction = direction == Direction.Right ? Direction.Left : Direction.Right});
                 return true;
             }
             
@@ -95,5 +104,19 @@ namespace BinaryTree
             _currentNode = _parentTree.Root;
             _nodeStack.Clear();
         }
+    }
+
+    internal struct NodeWithDirection<T> where T : IComparable<T>
+    {
+        internal Node<T> Node { get; set; }
+        internal Direction Direction { get; set; }
+
+    }
+
+    internal enum Direction
+    {
+        Right,
+        Left,
+        Entered
     }
 }

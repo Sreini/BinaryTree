@@ -129,17 +129,28 @@ namespace BinaryTreeTests
         public void TestIterator()
         {
             //Arrange
-            var tree = new BinarySearchTree<int>(new List<int>{4, 5, 6, 7, 8, 1, 10, -8, 27});
-            var newTree = new BinarySearchTree<int>(4);
+            var tree1 = new BinarySearchTree<int>(new List<int>{4, 5, 6, 7, 8, 1, 10, -8, 27});
+            var newTree1 = new BinarySearchTree<int>(4);
+
+          
+            var tree2 = new BinarySearchTree<int>(new List<int>{-1, 56, 23, 106, 24});
+            var newTree2 = new BinarySearchTree<int>(-1);
 
             //Act
-            //foreach (var key in tree)
-            //{
-           //     newTree.Add(key);
-            //}
+            foreach (var key in tree1)
+            {
+                newTree1.Add(key);
+            }
+
+            foreach (var key in tree2)
+            {
+                newTree2.Add(key);
+            }
 
             //Assert
-            Assert.AreEqual(tree.Count, 9);
+            Assert.AreEqual(tree1.Count, 9);
+            Assert.AreEqual(newTree1.Count, 9);
+            Assert.AreEqual(newTree2.Count, 5);
         }
     }
 
