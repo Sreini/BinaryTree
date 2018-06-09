@@ -233,12 +233,26 @@ namespace BinaryTree
 
         public IEnumerator<T> GetEnumerator()
         {
-            return new BinarySearchTreeEnumerator<T>(this);
+            return enumerate(Root).GetEnumerator();
         }
 
         IEnumerator IEnumerable.GetEnumerator()
         {
-            return new BinarySearchTreeEnumerator<T>(this);
+            return enumerate(Root).GetEnumerator();
+        }
+
+        IEnumerable<T> enumerate(Node<T> root)
+        {
+            if (root == null)
+                yield break;
+
+            yield return root.Key;
+
+            foreach (var value in enumerate(root.LeftChildNode))
+                yield return value;
+
+            foreach (var value in enumerate(root.RightChildNode))
+                yield return value;
         }
     }
 }

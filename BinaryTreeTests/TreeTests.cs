@@ -133,7 +133,7 @@ namespace BinaryTreeTests
             var newTree1 = new BinarySearchTree<int>(4);
 
           
-            var tree2 = new BinarySearchTree<int>(new List<int>{-1, 56, 23, 106, 24});
+            var tree2 = new BinarySearchTree<int>(new List<int>{-1, 56, 23, 106, 25});
             var newTree2 = new BinarySearchTree<int>(-1);
 
             //Act
