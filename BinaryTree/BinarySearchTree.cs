@@ -235,24 +235,28 @@ namespace BinaryTree
         {
             return enumerate(Root).GetEnumerator();
         }
-
+         
         IEnumerator IEnumerable.GetEnumerator()
         {
             return enumerate(Root).GetEnumerator();
         }
 
-        IEnumerable<T> enumerate(Node<T> root)
+        private IEnumerable<T> enumerate(Node<T> root)
         {
-            if (root == null)
-                yield break;
+            var stack = new Stack<Node<T>>();
+            stack.Push(root);
 
-            yield return root.Key;
+            while (stack.Count > 0)
+            {
+                var node = stack.Pop();
 
-            foreach (var value in enumerate(root.LeftChildNode))
-                yield return value;
+                if (node == null)
+                    continue;
 
-            foreach (var value in enumerate(root.RightChildNode))
-                yield return value;
+                yield return node.Key;
+                stack.Push(node.RightChildNode);
+                stack.Push(node.LeftChildNode);
+            }
         }
     }
 }
