@@ -23,7 +23,7 @@ namespace BinaryTree
             RightChildNode = null;
         }
 
-        public Node()
+        internal Node()
         {
             this.Key = default(T);
             LeftChildNode = null;

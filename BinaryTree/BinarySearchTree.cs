@@ -14,10 +14,13 @@ namespace BinaryTree
         public int Count { get; private set; }
         public bool IsReadOnly => false;
 
-        private BinarySearchTree()
+        /// <summary>
+        /// default constructor for empty tree
+        /// </summary>
+        public BinarySearchTree()
         {
-            Root = new Node<T>();
-            Count = 1;
+            Root = null;
+            Count = 0;
         }
 
         /// <summary>
@@ -36,16 +39,9 @@ namespace BinaryTree
         /// <param name="keyList"></param>
         public BinarySearchTree(ICollection<T> keyList)
         {
-            Root = new Node<T>(keyList.FirstOrDefault());
-            Count=1;
-            
             foreach (var key in keyList)
             {
-                if (Root.AddNode(key))
-                {
-                    Count++;
-                }
-
+                Add(key);
             }
         }
 
@@ -55,7 +51,13 @@ namespace BinaryTree
         /// <param name="key"></param>
         public void Add(T key) 
         {
-            if (Root.AddNode(key))
+            if (Root is null)
+            {
+                Root = new Node<T>(key);
+                Count = 1;
+
+            }
+            else if (Root.AddNode(key))
             {
                 Count++;
             }
