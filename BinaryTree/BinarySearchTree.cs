@@ -19,8 +19,8 @@ namespace BinaryTree
         /// </summary>
         public BinarySearchTree()
         {
-            Root = null;
-            Count = 0;
+            this.Root = null;
+            this.Count = 0;
         }
 
         /// <summary>
@@ -29,8 +29,8 @@ namespace BinaryTree
         /// <param name="key"></param>
         public BinarySearchTree(T key)
         {
-            Root = new Node<T>(key);
-            Count = 1;
+            this.Root = new Node<T>(key);
+            this.Count = 1;
         }
 
         /// <summary>
@@ -41,7 +41,7 @@ namespace BinaryTree
         {
             foreach (var key in keyList)
             {
-                Add(key);
+                this.Add(key);
             }
         }
 
@@ -53,13 +53,13 @@ namespace BinaryTree
         {
             if (Root is null)
             {
-                Root = new Node<T>(key);
-                Count = 1;
+                this.Root = new Node<T>(key);
+                this.Count = 1;
 
             }
             else if (Root.AddNode(key))
             {
-                Count++;
+                this.Count++;
             }
             
         }
@@ -211,6 +211,11 @@ namespace BinaryTree
             CopyTo(array, ref arrayIndex);
         }
 
+        /// <summary>
+        /// copies this tree to the array parameter, starting at the arrayIndex reference parameter as index
+        /// </summary>
+        /// <param name="array"></param>
+        /// <param name="arrayIndex"></param>
         private void CopyTo(T[] array, ref int arrayIndex)
         {
             try
@@ -233,16 +238,29 @@ namespace BinaryTree
 
         }
 
+        /// <summary>
+        /// calls get enumerator to provide an iterator
+        /// </summary>
+        /// <returns></returns>
         public IEnumerator<T> GetEnumerator()
         {
             return enumerate(Root).GetEnumerator();
         }
          
+        /// <summary>
+        /// calls get enumerator to provide an iterator
+        /// </summary>
+        /// <returns></returns>
         IEnumerator IEnumerable.GetEnumerator()
         {
             return enumerate(Root).GetEnumerator();
         }
 
+        /// <summary>
+        /// iterates over the tree to provide an iterator
+        /// </summary>
+        /// <param name="root"></param>
+        /// <returns></returns>
         private IEnumerable<T> enumerate(Node<T> root)
         {
             var stack = new Stack<Node<T>>();
@@ -261,4 +279,15 @@ namespace BinaryTree
             }
         }
     }
+}
+
+namespace BinaryTree.Extensions
+{
+    using BinaryTree;
+
+    public static class Extension
+    {
+        
+    }
+
 }
