@@ -152,6 +152,20 @@ namespace BinaryTreeTests
             Assert.AreEqual(newTree1.Count, 9);
             Assert.AreEqual(newTree2.Count, 5);
         }
+
+        [TestMethod]
+        public void TestExtensions()
+        {
+            //Arrange
+            var tree = new BinarySearchTree<int>{4, 5, 6, 3, 1, 7, 5, 9};
+
+            //Act
+            var list = tree.ToList();
+
+            //Assert    
+            Assert.AreEqual(tree.Count, list.Count);
+            Assert.AreEqual(tree.Any(), true);
+        }
     }
 
 }

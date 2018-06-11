@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace BinaryTree
 {
-    public class BinarySearchTree<T>: ICollection<T> where T: IComparable<T>
+    public class BinarySearchTree<T>: ICollection<T>, IReadOnlyCollection<T> where T: IComparable<T>
     {
         internal Node<T> Root { get; set; }
         public int Count { get; private set; }
@@ -188,7 +188,7 @@ namespace BinaryTree
         }
 
         /// <summary>
-        /// searches for the node that corresponds to the key parameter
+        /// Searches for the node that corresponds to the key parameter
         /// </summary>
         /// <param name="key"></param>
         /// <returns>
@@ -201,7 +201,7 @@ namespace BinaryTree
         }
 
         /// <summary>
-        /// copies this BInarySearchTree to the array given in the parameters, starting from the
+        /// Copies this BInarySearchTree to the array given in the parameters, starting from the
         /// arrayIndex parameter. If the BST does not fit in the array, the exception is handled and rethrown.
         /// </summary>
         /// <param name="array"></param>
@@ -212,7 +212,7 @@ namespace BinaryTree
         }
 
         /// <summary>
-        /// copies this tree to the array parameter, starting at the arrayIndex reference parameter as index
+        /// Copies this tree to the array parameter, starting at the arrayIndex reference parameter as index
         /// </summary>
         /// <param name="array"></param>
         /// <param name="arrayIndex"></param>
@@ -239,7 +239,7 @@ namespace BinaryTree
         }
 
         /// <summary>
-        /// calls get enumerator to provide an iterator
+        /// Calls get enumerator to provide an iterator
         /// </summary>
         /// <returns></returns>
         public IEnumerator<T> GetEnumerator()
@@ -248,7 +248,7 @@ namespace BinaryTree
         }
          
         /// <summary>
-        /// calls get enumerator to provide an iterator
+        /// Calls get enumerator to provide an iterator
         /// </summary>
         /// <returns></returns>
         IEnumerator IEnumerable.GetEnumerator()
@@ -257,7 +257,7 @@ namespace BinaryTree
         }
 
         /// <summary>
-        /// iterates over the tree to provide an iterator
+        /// Iterates over the tree to provide an iterator
         /// </summary>
         /// <param name="root"></param>
         /// <returns></returns>
@@ -281,13 +281,3 @@ namespace BinaryTree
     }
 }
 
-namespace BinaryTree.Extensions
-{
-    using BinaryTree;
-
-    public static class Extension
-    {
-        
-    }
-
-}
